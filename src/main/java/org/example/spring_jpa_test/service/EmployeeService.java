@@ -2,12 +2,14 @@ package org.example.spring_jpa_test.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.spring_jpa_test.domain.Employee;
+import org.example.spring_jpa_test.dto.EmployeeDto;
 import org.example.spring_jpa_test.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -45,7 +47,10 @@ public class EmployeeService {
     return false;
   }
 
-  public List<Employee> getAllEmployees() {
-    return employeeRepository.findAll();
+  public List<EmployeeDto> getAllEmployees() {
+    List<Employee> all = employeeRepository.findAll();
+    List<EmployeeDto> empDtos = all.stream().map(Employee::toEmpDto)
+        .collect(Collectors.toList());
+    return empDtos;
   }
 }

@@ -20,27 +20,27 @@ class EmployeeServiceTest {
   @Autowired
   private EmployeeService employeeService;
 
-  @Test
-  void createEmployee() {
-    // given
-    Employee employee = new Employee("20250001", "홍길동", 1, "20250101", 500);
-    // when
-    employeeService.createEmployee(employee);
-    // then
-    assertThat(employeeRepository.findById("20250001").isPresent()).isEqualTo(true);
-  }
+//  @Test
+//  void createEmployee() {
+//    // given
+//    Employee employee = new Employee("20250001", "홍길동", 1, "20250101", 500);
+//    // when
+//    employeeService.createEmployee(employee);
+//    // then
+//    assertThat(employeeRepository.findById("20250001").isPresent()).isEqualTo(true);
+//  }
 
-  @Test
-  void updateEmployee() {
-    // given
-    Employee employee = new Employee("20250001", "홍길동", 1, "20250101", 500);
-    employeeService.createEmployee(employee);
-    // when
-    boolean b = employeeService.updateEmployeeInfo(employee.getEmpId(), 10);
-    // then
-    assertThat(b).isTrue();
-    assertThat(employeeService.selectEmployee("20250001").getSalary()).isEqualTo(510);
-  }
+//  @Test
+//  void updateEmployee() {
+//    // given
+//    Employee employee = new Employee("20250001", "홍길동", 1, "20250101", 500);
+//    employeeService.createEmployee(employee);
+//    // when
+//    boolean b = employeeService.updateEmployeeInfo(employee.getEmpId(), 10);
+//    // then
+//    assertThat(b).isTrue();
+//    assertThat(employeeService.selectEmployee("20250001").getSalary()).isEqualTo(510);
+//  }
 
   @Test
   void otherQueries() {

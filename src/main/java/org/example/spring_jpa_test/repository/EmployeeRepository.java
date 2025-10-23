@@ -8,7 +8,7 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee, String> {
   List<Employee> findAllByEmpNameLike(String empName);
   List<Employee> findAllByEmpNameStartingWith(String familyName);
-  Employee findByEmpNameEqualsAndDeptIdEquals(String empName, int deptId);
+  //Employee findByEmpNameEqualsAndDeptIdEquals(String empName, int deptId);
   int countBySalaryBetween(long salary1, long salary2);
 }
 
