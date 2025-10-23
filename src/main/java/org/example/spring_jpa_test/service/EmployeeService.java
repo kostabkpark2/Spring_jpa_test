@@ -1,8 +1,10 @@
 package org.example.spring_jpa_test.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.spring_jpa_test.domain.Department;
 import org.example.spring_jpa_test.domain.Employee;
 import org.example.spring_jpa_test.dto.EmployeeDto;
+import org.example.spring_jpa_test.repository.DepartmentRepository;
 import org.example.spring_jpa_test.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,8 +18,24 @@ import java.util.stream.Collectors;
 @Transactional
 public class EmployeeService {
   private final EmployeeRepository employeeRepository;
+  private final DepartmentRepository departmentRepository;
 
-  public void createEmployee(Employee employee) {
+  public void createEmployee(EmployeeDto employeeDto) {
+    int deptId = employeeDto.getDeptId();
+    Department department = null;
+    if(deptId > 0) {
+      Optional<Department> byId = departmentRepository.findById(deptId);
+      if(byId.isPresent()) {
+        department = byId.get();
+      }
+    }
+    Employee employee = new Employee(
+        employeeDto.getEmpId(),
+        employeeDto.getEmpName(),
+        department,
+        "20251023",
+        0
+    );
     employeeRepository.save(employee);
   }
 
