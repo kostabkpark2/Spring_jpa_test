@@ -6,6 +6,8 @@ import org.example.spring_jpa_test.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -15,5 +17,35 @@ public class EmployeeService {
 
   public void createEmployee(Employee employee) {
     employeeRepository.save(employee);
+  }
+
+  public Employee selectEmployee(String empId) {
+    Optional<Employee> byId = employeeRepository.findById(empId);
+    return byId.isPresent() ? byId.get() : null;
+  }
+
+  public boolean updateEmployeeInfo(String empId, long change) {
+    Employee employee = selectEmployee(empId);
+    System.out.println("before" + employee);
+    if( employee != null) {
+      employee.setSalary(employee.getSalary() + change);
+      System.out.println("after" + employee);
+      employeeRepository.save(employee);
+      return true;
+    }
+    return false;
+  }
+
+  public boolean deleteEmployee(String empId) {
+    Employee employee = selectEmployee(empId);
+    if( employee != null) {
+      employeeRepository.deleteById(empId);
+      return true;
+    }
+    return false;
+  }
+
+  public List<Employee> getAllEmployees() {
+    return employeeRepository.findAll();
   }
 }
