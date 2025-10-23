@@ -26,4 +26,8 @@ public class EmployeeController {
     employeeService.createEmployee(employeeDto);
     return "사원정보 생성 완료";
   }
+
+  @GetMapping("/list/{deptId}")
+  @ResponseBody
+  public
 }
